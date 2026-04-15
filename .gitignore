@@ -1,0 +1,35 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Large 3D model files - using Git LFS for files over 50MB
+# GLB files are tracked by Git LFS (see .gitattributes)
+# Uncomment below if you want to exclude GLB files from Git entirely:
+# public/models/*.glb
+# *.glb
+
+# Environment variables
+.env
+.env.local
+.env.*.local
