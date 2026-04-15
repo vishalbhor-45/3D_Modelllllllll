@@ -83,10 +83,7 @@ function FreeTrackballControls(props) {
 
 
 export default function App() {
-  const [selectedModel, setSelectedModel] = useState({
-    name: 'MNB_624+800_glb1',
-    path: '/models/MNB_624+800_glb1.glb'
-  });
+  const [selectedModel, setSelectedModel] = useState(null);
   const [mapData, setMapData] = useState(null);
   const [modelCenter, setModelCenter] = useState([0, 0, 0]);
 
@@ -131,12 +128,6 @@ export default function App() {
       setMapData(null);
     }
   };
-
-  // Load initial data
-  useEffect(() => {
-    handleModelSelect(selectedModel);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div className="min-h-screen w-[99vw] bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 px-4 sm:px-6 md:px-8 lg:px-12 py-8 flex flex-col items-center justify-start" style={{ overflowX: 'hidden' }}>
@@ -229,11 +220,13 @@ export default function App() {
 
           {/* Model + Shadows */}
           <Suspense fallback={null}>
-            <BridgeModel
-              position={[0, 0, 0]}
-              modelPath={selectedModel.path}
-              onCenterChanged={setModelCenter}
-            />
+            {selectedModel && (
+              <BridgeModel
+                position={[0, 0, 0]}
+                modelPath={selectedModel.path}
+                onCenterChanged={setModelCenter}
+              />
+            )}
             <ContactShadows
               position={[0, -0.01, 0]}
               opacity={0.4}

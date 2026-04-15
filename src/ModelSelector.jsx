@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export default function ModelSelector({ onModelSelect, selectedModel }) {
+export default function ModelSelector({ onModelSelect, selectedModel, autoSelectFirst = true }) {
   const [isOpen, setIsOpen] = useState(false);
   const [availableModels, setAvailableModels] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,6 +17,9 @@ export default function ModelSelector({ onModelSelect, selectedModel }) {
             path: `/models/${modelFile}` // Keep original filename, encoding will be done in Bridge.jsx
           }));
           setAvailableModels(models);
+          if (autoSelectFirst && !selectedModel && models.length > 0) {
+            onModelSelect(models[0]);
+          }
         } else {
           // Fallback: try to discover models by checking known files
           const knownModels = [
